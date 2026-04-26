@@ -8,11 +8,10 @@
 
 html {
   scroll-behavior: smooth;
-  background-color: #0a0a0a; /* same as bg-ink — avoids default white along viewport edges */
 }
 
 body {
-  @apply overflow-x-clip bg-ink text-white antialiased;
+  @apply bg-ink text-white antialiased;
 }
 
 ::selection {
