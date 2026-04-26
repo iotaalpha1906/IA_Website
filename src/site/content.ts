@@ -21,7 +21,8 @@ export const site = {
   },
   social: {
     instagram: "https://www.instagram.com/iotaalpha1906/",
-    linkedin: "https://www.linkedin.com/",
+    linkedin:
+      "https://www.linkedin.com/company/alpha-phi-alpha-fraternity-inc-iota-alpha-chapter/",
   },
 } as const;
 
