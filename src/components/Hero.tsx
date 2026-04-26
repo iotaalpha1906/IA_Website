@@ -5,10 +5,7 @@ import { images } from "@/site/content";
 
 export function Hero() {
   return (
-    <section
-      id="home"
-      className="scroll-mt-28 relative overflow-hidden bg-ink lg:border-b lg:border-white/10"
-    >
+    <section id="home" className="scroll-mt-28 relative overflow-hidden bg-ink">
       <div className="absolute inset-0 bg-luxury-radial" aria-hidden />
       <ScrollReveal className="relative mx-auto grid max-w-7xl gap-0 lg:min-h-[min(88vh,920px)] lg:grid-cols-2">
         <div className="relative z-10 flex flex-col justify-center px-4 py-16 sm:px-6 lg:px-10 lg:py-24">
@@ -46,7 +43,7 @@ export function Hero() {
             alt=""
             fill
             priority
-            className="object-cover"
+            className="object-cover [transform:scale(1.01)] [transform-origin:center]" 
             sizes="(min-width: 1024px) 50vw, 100vw"
             aria-hidden
           />
@@ -62,7 +59,7 @@ export function Hero() {
                 alt="George Mason University sign"
                 width={1120}
                 height={620}
-                className="h-auto w-full border-0 object-contain opacity-62 mix-blend-screen saturate-75"
+                className="h-auto w-full border-0 object-contain opacity-55 saturate-75"
               />
             </div>
           </div>
