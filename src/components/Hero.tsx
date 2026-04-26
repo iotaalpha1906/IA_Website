@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { site } from "@/site/content";
 
 export function Hero() {
   return (
@@ -7,10 +8,16 @@ export function Hero() {
       <div className="absolute inset-0 bg-luxury-radial" aria-hidden />
       <ScrollReveal className="relative mx-auto flex min-h-[min(78vh,760px)] max-w-7xl flex-col items-center justify-center px-4 py-20 text-center sm:px-6 lg:min-h-[min(88vh,920px)] lg:px-8 lg:py-28">
         <div className="relative z-10 w-full max-w-4xl">
-          <h1 className="text-3xl font-extrabold uppercase leading-[1.08] tracking-tight text-white sm:text-4xl md:text-5xl lg:text-[2.85rem] xl:text-6xl">
-            Alpha Phi Alpha Fraternity, Inc.
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold sm:text-sm">
+            {site.chapterLine}
+          </p>
+          <h1 className="mt-3 text-3xl font-extrabold uppercase leading-[1.08] tracking-tight text-white sm:mt-4 sm:text-4xl md:text-5xl lg:text-[2.85rem] xl:text-6xl">
+            {site.fraternityLine}
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-white/85 sm:text-lg">
+          <p className="mt-2 text-[11px] font-semibold uppercase leading-snug tracking-[0.14em] text-white/75 sm:text-xs">
+            {site.universityLine}
+          </p>
+          <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-white/85 sm:mt-8 sm:text-lg">
             Developing Leaders. Building Legacy. Serving the Community.
           </p>
           <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
