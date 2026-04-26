@@ -13,6 +13,10 @@ export const metadata: Metadata = {
   title: "Iota Alpha Chapter | Alpha Phi Alpha Fraternity, Inc.",
   description:
     "Iota Alpha Chapter at George Mason University — developing leaders, building legacy, and serving the community.",
+  icons: {
+    icon: "/branding/APhiA_Crest.png",
+    apple: "/branding/APhiA_Crest.png",
+  },
 };
 
 export default function RootLayout({
