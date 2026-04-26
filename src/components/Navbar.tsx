@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Instagram, Linkedin, Mail, Menu, X } from "lucide-react";
 import { CrestMark } from "@/components/CrestMark";
+import { InquiryIconTrigger, useInquiryModal } from "@/components/InquiryModal";
 import { site } from "@/site/content";
 
 /** Order matches page flow and ends with external donate link. */
@@ -21,6 +22,7 @@ const navItems = [
 ] as const;
 
 export function Navbar() {
+  const { openInquiry } = useInquiryModal();
   const [open, setOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("#home");
   const desktopNavRef = useRef<HTMLElement | null>(null);
@@ -161,13 +163,11 @@ export function Navbar() {
             >
               <Linkedin className="h-[14px] w-[14px]" strokeWidth={1.75} />
             </a>
-            <a
-              href="#inquiry"
+            <InquiryIconTrigger
               className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-gold/40 text-gold transition hover:border-gold hover:bg-gold/10 hover:shadow-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/50"
-              aria-label="Send an inquiry"
             >
               <Mail className="h-[14px] w-[14px]" strokeWidth={1.75} />
-            </a>
+            </InquiryIconTrigger>
           </div>
 
           <button
@@ -209,25 +209,37 @@ export function Navbar() {
                 </a>
               );
             })}
-            <div className="mt-3 flex gap-2 border-t border-white/10 pt-4">
-              <a
-                href={site.social.instagram}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex h-11 flex-1 items-center justify-center gap-2 rounded-lg border border-gold/35 text-xs font-semibold uppercase tracking-widest text-gold"
+            <div className="mt-3 space-y-2 border-t border-white/10 pt-4">
+              <button
+                type="button"
+                onClick={() => {
+                  setOpen(false);
+                  openInquiry();
+                }}
+                className="w-full rounded-lg border border-gold/35 py-3 text-center text-xs font-semibold uppercase tracking-widest text-gold transition hover:bg-gold/10"
               >
-                <Instagram className="h-4 w-4" />
-                Instagram
-              </a>
-              <a
-                href={site.social.linkedin}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex h-11 flex-1 items-center justify-center gap-2 rounded-lg border border-gold/35 text-xs font-semibold uppercase tracking-widest text-gold"
-              >
-                <Linkedin className="h-4 w-4" />
-                LinkedIn
-              </a>
+                Send an inquiry
+              </button>
+              <div className="flex gap-2">
+                <a
+                  href={site.social.instagram}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex h-11 flex-1 items-center justify-center gap-2 rounded-lg border border-gold/35 text-xs font-semibold uppercase tracking-widest text-gold"
+                >
+                  <Instagram className="h-4 w-4" />
+                  Instagram
+                </a>
+                <a
+                  href={site.social.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex h-11 flex-1 items-center justify-center gap-2 rounded-lg border border-gold/35 text-xs font-semibold uppercase tracking-widest text-gold"
+                >
+                  <Linkedin className="h-4 w-4" />
+                  LinkedIn
+                </a>
+              </div>
             </div>
           </nav>
         </div>

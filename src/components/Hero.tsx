@@ -7,17 +7,15 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="scroll-mt-28 relative overflow-hidden border-b border-white/10 bg-ink"
+      className="scroll-mt-28 relative overflow-hidden bg-ink lg:border-b lg:border-white/10"
     >
       <div className="absolute inset-0 bg-luxury-radial" aria-hidden />
       <ScrollReveal className="relative mx-auto grid max-w-7xl gap-0 lg:min-h-[min(88vh,920px)] lg:grid-cols-2">
         <div className="relative z-10 flex flex-col justify-center px-4 py-16 sm:px-6 lg:px-10 lg:py-24">
-          <div className="pointer-events-none absolute inset-0 lg:bg-gradient-to-r lg:from-black lg:via-black/92 lg:to-transparent" />
+          {/* End with solid ink at the right edge so it matches the column seam (not transparent to radial). */}
+          <div className="pointer-events-none absolute inset-0 lg:bg-gradient-to-r lg:from-black lg:via-black/88 lg:to-ink" />
           <div className="relative max-w-xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.28em] text-gold sm:text-base lg:text-lg">
-              Iota Alpha Chapter —
-            </p>
-            <h1 className="mt-4 text-3xl font-extrabold uppercase leading-[1.05] tracking-tight text-white sm:text-4xl md:text-5xl lg:text-[2.85rem] xl:text-6xl">
+            <h1 className="text-3xl font-extrabold uppercase leading-[1.05] tracking-tight text-white sm:text-4xl md:text-5xl lg:text-[2.85rem] xl:text-6xl">
               Alpha Phi Alpha Fraternity, Inc.
             </h1>
             <p className="mt-6 max-w-lg text-base leading-relaxed text-white/85 sm:text-lg">
@@ -42,21 +40,19 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="relative min-h-[320px] lg:min-h-full">
+        <div className="relative min-h-[320px] bg-ink isolate lg:min-h-full">
           <Image
             src={images.hero}
-            alt="Brothers representing Iota Alpha Chapter"
+            alt=""
             fill
             priority
             className="object-cover"
             sizes="(min-width: 1024px) 50vw, 100vw"
-          />
-          <div
-            className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/25 lg:bg-gradient-to-l lg:from-transparent lg:via-black/55 lg:to-black/90"
             aria-hidden
           />
+          {/* Match left column: start from solid ink on the seam, then let the photo read through rightward. */}
           <div
-            className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(201,151,0,0.12),transparent_55%)]"
+            className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/30 lg:bg-gradient-to-r lg:from-ink lg:from-0% lg:via-black/30 lg:via-35% lg:to-transparent"
             aria-hidden
           />
           <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center px-4 py-6 lg:px-6">
@@ -66,7 +62,7 @@ export function Hero() {
                 alt="George Mason University sign"
                 width={1120}
                 height={620}
-                className="h-auto w-full rounded-[2px] object-contain opacity-62 mix-blend-screen saturate-75"
+                className="h-auto w-full border-0 object-contain opacity-62 mix-blend-screen saturate-75"
               />
             </div>
           </div>

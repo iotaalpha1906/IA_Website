@@ -4,7 +4,12 @@ import { useState } from "react";
 
 type Status = "idle" | "sending" | "success" | "error";
 
-export function ContactForm() {
+type ContactFormProps = {
+  /** Hide the gold "Send an inquiry" line (e.g. when the modal provides its own header) */
+  hideTitle?: boolean;
+};
+
+export function ContactForm({ hideTitle = false }: ContactFormProps) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
@@ -59,7 +64,9 @@ export function ContactForm() {
 
   return (
     <form onSubmit={onSubmit} className="space-y-4" noValidate>
-      <p className="text-xs font-bold uppercase tracking-[0.24em] text-gold">Send an inquiry</p>
+      {hideTitle ? null : (
+        <p className="text-xs font-bold uppercase tracking-[0.24em] text-gold">Send an inquiry</p>
+      )}
       <div className="grid gap-3 sm:grid-cols-2">
         <label className="block text-left text-sm text-white/80">
           <span className="mb-1.5 block text-xs uppercase tracking-wider text-white/50">Name</span>
