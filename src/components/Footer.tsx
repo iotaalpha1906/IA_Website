@@ -33,7 +33,7 @@ export function Footer() {
                 href={site.social.instagram}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex h-13 w-13 items-center justify-center rounded-full border border-white/15 text-white transition hover:border-gold hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/45"
+                className="inline-flex h-13 w-13 items-center justify-center rounded-full border border-white/15 text-white transition hover:border-gold hover:bg-gold/10 hover:text-gold hover:shadow-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/45"
                 aria-label="Instagram"
               >
                 <Instagram className="h-5 w-5" />
@@ -42,14 +42,14 @@ export function Footer() {
                 href={site.social.linkedin}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex h-13 w-13 items-center justify-center rounded-full border border-white/15 text-white transition hover:border-gold hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/45"
+                className="inline-flex h-13 w-13 items-center justify-center rounded-full border border-white/15 text-white transition hover:border-gold hover:bg-gold/10 hover:text-gold hover:shadow-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/45"
                 aria-label="LinkedIn"
               >
                 <Linkedin className="h-5 w-5" />
               </a>
               <a
                 href={`mailto:${site.email}`}
-                className="inline-flex h-13 w-13 items-center justify-center rounded-full border border-white/15 text-white transition hover:border-gold hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/45"
+                className="inline-flex h-13 w-13 items-center justify-center rounded-full border border-white/15 text-white transition hover:border-gold hover:bg-gold/10 hover:text-gold hover:shadow-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/45"
                 aria-label="Email"
               >
                 <Mail className="h-5 w-5" />

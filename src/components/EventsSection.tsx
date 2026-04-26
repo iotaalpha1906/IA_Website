@@ -35,7 +35,7 @@ export function EventsSection() {
           </h2>
           <a
             href="#events"
-            className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.28em] text-gold transition hover:text-[#d6a512] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#070707]"
+            className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.28em] text-gold transition hover:text-[#d6a512] hover:drop-shadow-[0_0_10px_rgba(201,151,0,0.55)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#070707]"
           >
             View All Events
             <ArrowRight className="h-4 w-4" />

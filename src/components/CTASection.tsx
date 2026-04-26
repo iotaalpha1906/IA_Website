@@ -17,7 +17,7 @@ export function CTASection() {
         </p>
         <a
           href="#contact"
-          className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-black px-7 py-3.5 text-xs font-bold uppercase tracking-[0.22em] text-white transition hover:-translate-y-0.5 hover:bg-black/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 focus-visible:ring-offset-2 focus-visible:ring-offset-gold sm:w-auto"
+          className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-black px-7 py-3.5 text-xs font-bold uppercase tracking-[0.22em] text-white transition hover:-translate-y-0.5 hover:bg-black/90 hover:shadow-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 focus-visible:ring-offset-2 focus-visible:ring-offset-gold sm:w-auto"
         >
           Join Interest List
           <ArrowRight className="h-4 w-4" />
