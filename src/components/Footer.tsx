@@ -1,4 +1,5 @@
 import { Instagram, Linkedin, Mail } from "lucide-react";
+import { ContactForm } from "@/components/ContactForm";
 import { CrestMark } from "@/components/CrestMark";
 import { site } from "@/site/content";
 
@@ -28,7 +29,15 @@ export function Footer() {
 
           <div className="text-center">
             <h3 className="text-sm font-bold uppercase tracking-[0.24em] text-gold">Contact Us</h3>
-            <div className="mt-6 flex justify-center gap-4">
+            <p className="mt-2 text-sm text-white/60">
+              <a
+                href="#inquiry"
+                className="underline decoration-gold/50 underline-offset-2 transition hover:text-white"
+              >
+                Send an inquiry
+              </a>
+            </p>
+            <div className="mt-4 flex justify-center gap-4">
               <a
                 href={site.social.instagram}
                 target="_blank"
@@ -48,13 +57,19 @@ export function Footer() {
                 <Linkedin className="h-5 w-5" />
               </a>
               <a
-                href={`mailto:${site.email}`}
+                href="#inquiry"
                 className="inline-flex h-13 w-13 items-center justify-center rounded-full border border-white/15 text-white transition hover:border-gold hover:bg-gold/10 hover:text-gold hover:shadow-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/45"
-                aria-label="Email"
+                aria-label="Send an inquiry"
               >
                 <Mail className="h-5 w-5" />
               </a>
             </div>
+          </div>
+        </div>
+
+        <div id="inquiry" className="mt-10 scroll-mt-28 border-t border-white/10 pt-10">
+          <div className="mx-auto max-w-xl px-0">
+            <ContactForm />
           </div>
         </div>
 

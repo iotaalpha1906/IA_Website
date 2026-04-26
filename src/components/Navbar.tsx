@@ -162,9 +162,9 @@ export function Navbar() {
               <Linkedin className="h-[14px] w-[14px]" strokeWidth={1.75} />
             </a>
             <a
-              href={`mailto:${site.email}`}
+              href="#inquiry"
               className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-gold/40 text-gold transition hover:border-gold hover:bg-gold/10 hover:shadow-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/50"
-              aria-label="Email"
+              aria-label="Send an inquiry"
             >
               <Mail className="h-[14px] w-[14px]" strokeWidth={1.75} />
             </a>

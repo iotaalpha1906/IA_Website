@@ -13,7 +13,6 @@ export const site = {
   chapterLine: "Iota Alpha Chapter",
   fraternityLine: "Alpha Phi Alpha Fraternity, Inc.",
   universityLine: "George Mason University",
-  email: "iotaalpha1906@gmail.com",
   address: {
     line1: "George Mason University",
     line2: "Fairfax, VA 22030",
