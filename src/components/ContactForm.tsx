@@ -1,13 +1,23 @@
 "use client";
 
 import { useState } from "react";
+import { site } from "@/site/content";
 
-type Status = "idle" | "sending" | "success" | "error";
+type Status = "idle" | "opening" | "success" | "error";
 
 type ContactFormProps = {
   /** Hide the gold "Send an inquiry" line (e.g. when the modal provides its own header) */
   hideTitle?: boolean;
 };
+
+const emailOk = (s: string) =>
+  /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s.trim()) && s.length <= 254;
+
+function buildMailto(to: string, name: string, fromEmail: string, message: string) {
+  const subject = `Website message from ${name}`;
+  const body = `From: ${name} <${fromEmail}>\n\n${message}`;
+  return `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
 
 export function ContactForm({ hideTitle = false }: ContactFormProps) {
   const [name, setName] = useState("");
@@ -17,38 +27,54 @@ export function ContactForm({ hideTitle = false }: ContactFormProps) {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
-  async function onSubmit(e: React.FormEvent) {
+  function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     setErrorMessage("");
-    setStatus("sending");
 
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, message, company }),
-      });
-      const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string };
-
-      if (!res.ok) {
-        setErrorMessage(
-          data.error ?? "Something went wrong. Please try again in a few minutes."
-        );
-        setStatus("error");
-        return;
-      }
-      if (data.ok) {
-        setName("");
-        setEmail("");
-        setMessage("");
-        setStatus("success");
-        return;
-      }
+    if (company.trim() !== "") {
       setStatus("success");
-    } catch {
-      setErrorMessage("Network error. Check your connection and try again.");
-      setStatus("error");
+      return;
     }
+
+    if (!name.trim() || name.length > 120) {
+      setErrorMessage("Please enter your name (1–120 characters).");
+      setStatus("error");
+      return;
+    }
+    if (!emailOk(email)) {
+      setErrorMessage("Please enter a valid email address.");
+      setStatus("error");
+      return;
+    }
+    if (message.trim().length < 10 || message.length > 5000) {
+      setErrorMessage("Please enter a message of at least 10 characters (max 5,000).");
+      setStatus("error");
+      return;
+    }
+
+    const to = site.inquiryInbox;
+    if (!to || !emailOk(to)) {
+      setErrorMessage("Inquiry email is not configured. Set site.inquiryInbox in content.");
+      setStatus("error");
+      return;
+    }
+
+    setStatus("opening");
+    const href = buildMailto(to, name.trim(), email.trim(), message.trim());
+    if (href.length > 8000) {
+      setErrorMessage("Message is too long for a mail link. Please shorten the text and try again.");
+      setStatus("error");
+      return;
+    }
+
+    setName("");
+    setEmail("");
+    setMessage("");
+    setStatus("success");
+    const a = document.createElement("a");
+    a.href = href;
+    a.rel = "noopener noreferrer";
+    a.click();
   }
 
   if (status === "success") {
@@ -57,7 +83,8 @@ export function ContactForm({ hideTitle = false }: ContactFormProps) {
         className="rounded-lg border border-gold/40 bg-white/5 px-4 py-3 text-sm text-white/90"
         role="status"
       >
-        Thank you. Your message has been sent. A brother will get back to you when possible.
+        If your email app opened, send the message there to contact the chapter. If nothing
+        opened, set up a mail program or add this site to the allowed list for your browser.
       </p>
     );
   }
@@ -130,10 +157,10 @@ export function ContactForm({ hideTitle = false }: ContactFormProps) {
       )}
       <button
         type="submit"
-        disabled={status === "sending"}
+        disabled={status === "opening"}
         className="w-full rounded-full border border-gold/70 bg-gold/10 px-5 py-3 text-xs font-bold uppercase tracking-[0.2em] text-gold transition hover:border-gold hover:bg-gold/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/50 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
       >
-        {status === "sending" ? "Sending…" : "Send message"}
+        {status === "opening" ? "Opening email…" : "Send message"}
       </button>
     </form>
   );

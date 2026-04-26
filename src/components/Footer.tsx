@@ -1,5 +1,5 @@
 import { Instagram, Linkedin, Mail } from "lucide-react";
-import { InquiryIconTrigger, InquiryTextTrigger } from "@/components/InquiryModal";
+import { InquiryIconTrigger } from "@/components/InquiryModal";
 import { CrestMark } from "@/components/CrestMark";
 import { site } from "@/site/content";
 
@@ -29,10 +29,7 @@ export function Footer() {
 
           <div className="text-center">
             <h3 className="text-sm font-bold uppercase tracking-[0.24em] text-gold">Contact Us</h3>
-            <p className="mt-2 text-sm text-white/60">
-              <InquiryTextTrigger>Send an inquiry</InquiryTextTrigger>
-            </p>
-            <div className="mt-4 flex justify-center gap-4">
+            <div className="mt-6 flex justify-center gap-4">
               <a
                 href={site.social.instagram}
                 target="_blank"
