@@ -35,9 +35,8 @@ export const images = {
     "https://images.unsplash.com/photo-1523240795612-9a054b055de1?auto=format&fit=crop&w=900&q=80",
     "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=900&q=80",
   ],
-  /** Advising/graduate chapter — replace with a photo in `/public` and path like `/photos/xal.jpg` if preferred. */
-  graduateChapter:
-    "https://images.unsplash.com/photo-1523240795612-9a054b055de1?auto=format&fit=crop&w=1200&q=80",
+  /** Advising/graduate chapter — file lives in `public/photos/`. */
+  graduateChapter: "/photos/xi-alpha-lambda.jpg",
 } as const;
 
 export const aboutCopy = {
@@ -76,7 +75,7 @@ export const executiveBoard: ExecutiveBoardMember[] = [
   {
     name: "Cameron Portis",
     photo: "/Leadership_Headshots/CPortis_Headshot.jpg",
-    positions: ["President", "Director of Educational Activities", "Chaplin"],
+    positions: ["President", "Director of Educational Activities", "Chaplain"],
   },
   {
     name: "Teondre Nash",

@@ -26,10 +26,10 @@ export function GraduateChapterSection() {
               href={graduateChapter.website}
               target="_blank"
               rel="noreferrer"
-              className="mt-8 inline-flex items-center justify-center gap-2 rounded-full border border-gold/60 px-6 py-3 text-xs font-bold uppercase tracking-[0.22em] text-white transition hover:border-gold hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/50"
+              className="group mt-8 inline-flex items-center justify-center gap-2 rounded-full border border-gold/70 bg-transparent px-7 py-3.5 text-xs font-bold uppercase tracking-[0.2em] text-white transition hover:border-gold hover:bg-white/5 hover:shadow-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60"
             >
               Learn More
-              <ArrowRight className="h-4 w-4" />
+              <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
             </a>
           </div>
 
