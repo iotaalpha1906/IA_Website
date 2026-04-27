@@ -35,12 +35,26 @@ export const images = {
     "https://images.unsplash.com/photo-1523240795612-9a054b055de1?auto=format&fit=crop&w=900&q=80",
     "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=900&q=80",
   ],
+  /** Advising/graduate chapter — replace with a photo in `/public` and path like `/photos/xal.jpg` if preferred. */
+  graduateChapter:
+    "https://images.unsplash.com/photo-1523240795612-9a054b055de1?auto=format&fit=crop&w=1200&q=80",
 } as const;
 
 export const aboutCopy = {
   eyebrow: "About Our Chapter",
   heading: "A Legacy of Leadership Since 1986",
   body: `The Iota Alpha Chapter carries forward the timeless mission of Alpha Phi Alpha Fraternity, Inc. at George Mason University. We cultivate disciplined leaders, sharpen academic excellence, and anchor our work in service to the campus and Fairfax community. Through mentorship, programming, and brotherhood, we strive to live the example set since 1906—First of All; Servants of All; We shall Transcend All.`,
+} as const;
+
+export const graduateChapter = {
+  name: "Xi Alpha Lambda",
+  website: "https://www.xal1906.com/",
+} as const;
+
+export const graduateChapterCopy = {
+  eyebrow: "Our Advising/Graduate Chapter",
+  heading: graduateChapter.name,
+  body: `Xi Alpha Lambda (XAL) Chapter of Alpha Phi Alpha Fraternity, Inc. serves the Prince William County area of Virginia. For more than 30 years, XAL has been a leading graduate chapter in the Eastern Region, supporting Alpha’s mission through service, programs, and leadership—and as the advising chapter to Iota Alpha.`,
 } as const;
 
 /**

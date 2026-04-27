@@ -11,6 +11,7 @@ const navItems = [
   { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
   { label: "Chapter Leadership", href: "#chapter-leadership" },
+  { label: "Graduate Chapter", href: "#graduate-chapter" },
   { label: "Programs", href: "#programs" },
   { label: "Events", href: "#events" },
   { label: "Contact", href: "#contact" },
