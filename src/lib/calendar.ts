@@ -5,14 +5,20 @@ import type { CalendarResponse, EventInstance, ParameterValue, VEvent } from "no
 
 export type UpcomingEvent = {
   title: string;
+  /** Collapsed: same one-line line as before (start, or all day). */
   when: string;
+  /** Full description (shown in expanded panel). */
   description: string;
   month: string;
   day: string;
   key: string;
+  location: string;
+  /** Start → end, same timezone as the rest of the site. */
+  timeRange: string;
 };
 
 const MAX_EVENTS = 9;
+const MAX_DESC = 12_000;
 
 function paramText(v: ParameterValue | undefined | string | EventInstance["summary"]): string {
   if (v == null) return "";
@@ -27,6 +33,15 @@ function stripHtml(s: string): string {
     .replace(/<[^>]+>/g, "")
     .replace(/\n{3,}/g, "\n\n")
     .trim();
+}
+
+function toYmd(d: Date, tz: string): string {
+  return new Intl.DateTimeFormat("en-CA", {
+    timeZone: tz,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(d);
 }
 
 /**
@@ -64,9 +79,11 @@ export async function getUpcomingEvents(): Promise<UpcomingEvent[]> {
 
   const flat: {
     start: Date;
+    end: Date;
     isFullDay: boolean;
     summary: string;
     description: string;
+    location: string;
     uid: string;
     key: string;
   }[] = [];
@@ -89,18 +106,27 @@ export async function getUpcomingEvents(): Promise<UpcomingEvent[]> {
 
     for (const inst of instances) {
       const start = inst.start instanceof Date ? inst.start : new Date(inst.start);
+      const rawEnd = inst.end
+        ? inst.end instanceof Date
+          ? inst.end
+          : new Date(inst.end)
+        : null;
+      const end = rawEnd ?? new Date(start.getTime() + 60 * 60 * 1000);
       const v = inst.event as VEvent;
       const title =
         paramText(inst.summary as ParameterValue) || paramText(v.summary) || "Event";
       const descRaw = paramText(v.description);
       const plain = descRaw ? stripHtml(descRaw) : "";
-      const description =
-        plain.length > 500 ? `${plain.slice(0, 500)}…` : plain;
+      const description = plain.length > MAX_DESC ? `${plain.slice(0, MAX_DESC)}…` : plain;
+      const location = paramText(v.location);
+
       flat.push({
         start,
+        end,
         isFullDay: inst.isFullDay,
         summary: title,
         description,
+        location,
         uid: v.uid,
         key: `${v.uid}-${start.getTime()}`,
       });
@@ -125,6 +151,8 @@ export async function getUpcomingEvents(): Promise<UpcomingEvent[]> {
         row.start,
       ),
       when: formatWhen(row.start, tz, row.isFullDay),
+      location: row.location,
+      timeRange: formatTimeRange(row.start, row.end, tz, row.isFullDay),
     });
     if (out.length >= MAX_EVENTS) break;
   }
@@ -151,6 +179,56 @@ function formatWhen(d: Date, tz: string, isAllDay: boolean): string {
     hour: "numeric",
     minute: "2-digit",
   }).format(d);
+}
+
+function formatNiceDate(d: Date, tz: string): string {
+  return new Intl.DateTimeFormat("en-US", {
+    timeZone: tz,
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  }).format(d);
+}
+
+function formatTime(d: Date, tz: string): string {
+  return new Intl.DateTimeFormat("en-US", {
+    timeZone: tz,
+    hour: "numeric",
+    minute: "2-digit",
+  }).format(d);
+}
+
+function formatTimeRange(
+  start: Date,
+  end: Date,
+  tz: string,
+  isAllDay: boolean,
+): string {
+  if (isAllDay) {
+    // DTEND is exclusive: last included calendar day in tz
+    const lastInclusive = new Date(end.getTime() - 1);
+    const startY = toYmd(start, tz);
+    const lastY = toYmd(lastInclusive, tz);
+    if (startY === lastY) {
+      return "All day";
+    }
+    return `All day · ${formatNiceDate(start, tz)} – ${formatNiceDate(lastInclusive, tz)}`;
+  }
+
+  if (end <= start) {
+    return formatTime(start, tz);
+  }
+
+  const sDay = toYmd(start, tz);
+  const eDay = toYmd(end, tz);
+  if (sDay === eDay) {
+    return `${formatTime(start, tz)} – ${formatTime(end, tz)}`;
+  }
+  return `${formatNiceDate(start, tz)} ${formatTime(start, tz)} – ${formatNiceDate(end, tz)} ${formatTime(
+    end,
+    tz,
+  )}`;
 }
 
 /** Optional: Google Calendar web URL for “View all events”. */
