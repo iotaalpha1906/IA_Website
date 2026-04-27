@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import { ScrollForMoreCta } from "@/components/ScrollForMoreCta";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { site } from "@/site/content";
 
@@ -37,6 +38,7 @@ export function Hero() {
             </a>
           </div>
         </div>
+        <ScrollForMoreCta />
       </ScrollReveal>
     </section>
   );

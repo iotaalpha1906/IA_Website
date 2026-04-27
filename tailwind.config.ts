@@ -31,6 +31,15 @@ const config: Config = {
         "gold-shine":
           "linear-gradient(135deg, rgba(201, 151, 0, 0.12) 0%, transparent 45%, rgba(201, 151, 0, 0.08) 100%)",
       },
+      keyframes: {
+        "scroll-hint": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(0.4rem)" },
+        },
+      },
+      animation: {
+        "scroll-hint": "scroll-hint 1.4s ease-in-out infinite",
+      },
     },
   },
   plugins: [],
