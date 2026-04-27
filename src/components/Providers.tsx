@@ -1,7 +1,5 @@
-"use client";
+import type { ReactNode } from "react";
 
-import { InquiryModalProvider } from "@/components/InquiryModal";
-
-export function Providers({ children }: { children: React.ReactNode }) {
-  return <InquiryModalProvider>{children}</InquiryModalProvider>;
+export function Providers({ children }: { children: ReactNode }) {
+  return <>{children}</>;
 }
