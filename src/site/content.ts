@@ -1,6 +1,9 @@
 /**
  * Central place for chapter copy and media paths.
  *
+ * Events: upcoming events load from Google Calendar via GOOGLE_CALENDAR_ICAL_URL
+ * (see .env.example). No code changes when you add or edit events in Google.
+ *
  * Replace images:
  * - Swap `heroImage`, `aboutImage`, and `brotherhoodGallery` URLs with files in `/public`
  *   (e.g. `/photos/hero.jpg`) and remove remotePatterns from `next.config.ts` if not needed.
