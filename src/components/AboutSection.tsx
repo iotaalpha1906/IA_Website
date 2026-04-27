@@ -1,25 +1,9 @@
 import { Award, CalendarDays, GraduationCap } from "lucide-react";
 import { ExecutiveBoardCarousel } from "@/components/ExecutiveBoardCarousel";
 import { ScrollReveal } from "@/components/ScrollReveal";
-import { aboutCopy } from "@/site/content";
+import { aboutCopy, aboutMeta } from "@/site/content";
 
-const meta = [
-  {
-    icon: Award,
-    label: "Fraternity Founded",
-    value: "1906",
-  },
-  {
-    icon: CalendarDays,
-    label: "Chapter Chartered",
-    value: "1986",
-  },
-  {
-    icon: GraduationCap,
-    label: "Chapter Seat",
-    value: "George Mason University",
-  },
-] as const;
+const aboutMetaIcons = [Award, CalendarDays, GraduationCap] as const;
 
 export function AboutSection() {
   return (
@@ -29,9 +13,9 @@ export function AboutSection() {
         className="scroll-mt-28 relative border-b border-white/10 bg-gradient-to-b from-ink via-[#0b0b0b] to-ink"
       >
         <div className="pointer-events-none absolute inset-0 bg-gold-shine opacity-70" />
-        <ScrollReveal className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+        <ScrollReveal className="relative z-10 mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           <div className="grid items-start gap-10 lg:grid-cols-12 lg:gap-12">
-            <div className="lg:col-span-6">
+            <div className="min-w-0 lg:col-span-6">
               <p className="text-sm font-semibold uppercase tracking-[0.35em] text-gold sm:text-base">
                 {aboutCopy.eyebrow}
               </p>
@@ -43,21 +27,30 @@ export function AboutSection() {
               </p>
 
               <ul className="mt-10 space-y-4">
-                {meta.map((item) => (
-                <li key={item.value} className="flex items-center gap-3">
-                  <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-gold/35 bg-gold/10 text-gold">
-                    <item.icon className="h-4 w-4" strokeWidth={1.75} />
-                  </span>
-                  <span>
-                    <span className="text-sm font-semibold uppercase tracking-[0.18em] text-gold sm:text-base">
-                      {item.label}:{" "}
-                    </span>
-                    <span className="text-base leading-relaxed text-white/75 sm:text-lg">
-                      {item.value}
-                    </span>
-                  </span>
-                </li>
-                ))}
+                {aboutMeta.map((item, i) => {
+                  const Icon = aboutMetaIcons[i]!;
+                  return (
+                    <li
+                      key={item.label}
+                      className="flex items-start gap-3"
+                    >
+                      <span className="mt-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-gold/35 bg-gold/10 text-gold">
+                        <Icon className="h-4 w-4" strokeWidth={1.75} />
+                      </span>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-base leading-relaxed sm:text-lg">
+                          <span className="text-sm font-semibold uppercase tracking-[0.18em] text-gold sm:text-base">
+                            {item.label}
+                            {": "}
+                          </span>
+                          <span className="break-words text-white/75">
+                            {item.value}
+                          </span>
+                        </p>
+                      </div>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           </div>

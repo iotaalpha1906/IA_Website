@@ -45,6 +45,13 @@ export const aboutCopy = {
   body: `The Iota Alpha Chapter carries forward the timeless mission of Alpha Phi Alpha Fraternity, Inc. at George Mason University. We cultivate disciplined leaders, sharpen academic excellence, and anchor our work in service to the campus and Fairfax community. Through mentorship, programming, and brotherhood, we strive to live the example set since 1906—First of All; Servants of All; We shall Transcend All.`,
 } as const;
 
+/** Shown in the about section list (label + value). */
+export const aboutMeta = [
+  { label: "Fraternity Founded", value: "December 4th, 1906" },
+  { label: "Chapter Chartered", value: "December 7th, 1986" },
+  { label: "Chapter Seat", value: "George Mason University, Fairfax, VA" },
+] as const;
+
 export const graduateChapter = {
   name: "Xi Alpha Lambda",
   website: "https://www.xal1906.com/",
