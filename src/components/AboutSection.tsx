@@ -1,11 +1,17 @@
 import { Award, CalendarDays, GraduationCap } from "lucide-react";
+import { ChapterLineagePanel } from "@/components/ChapterLineagePanel";
 import { ExecutiveBoardCarousel } from "@/components/ExecutiveBoardCarousel";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { getChapterLineage } from "@/lib/chapterLineage";
+import { getExecutiveBoard } from "@/lib/executiveBoardSheet";
 import { aboutCopy, aboutMeta } from "@/site/content";
 
 const aboutMetaIcons = [Award, CalendarDays, GraduationCap] as const;
 
-export function AboutSection() {
+export async function AboutSection() {
+  const lineage = await getChapterLineage();
+  const executiveBoard = await getExecutiveBoard();
+
   return (
     <>
       <section
@@ -53,6 +59,7 @@ export function AboutSection() {
                 })}
               </ul>
             </div>
+            <ChapterLineagePanel entries={lineage} />
           </div>
         </ScrollReveal>
       </section>
@@ -63,7 +70,7 @@ export function AboutSection() {
       >
         <div className="pointer-events-none absolute inset-0 bg-gold-shine opacity-50" />
         <ScrollReveal className="relative mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-16">
-          <ExecutiveBoardCarousel />
+          <ExecutiveBoardCarousel members={executiveBoard} />
         </ScrollReveal>
       </section>
     </>

@@ -4,6 +4,9 @@
  * Events: upcoming events load from Google Calendar via GOOGLE_CALENDAR_ICAL_URL
  * (see .env.example). No code changes when you add or edit events in Google.
  *
+ * Lineage: primary source is Google Sheets when GOOGLE_SHEETS_LINEAGE_SPREADSHEET_ID
+ * is set (see .env.example). Otherwise use `chapterLineage` below as fallback.
+ *
  * Replace images:
  * - Swap `heroImage`, `aboutImage`, and `brotherhoodGallery` URLs with files in `/public`
  *   (e.g. `/photos/hero.jpg`) and remove remotePatterns from `next.config.ts` if not needed.
@@ -53,6 +56,29 @@ export const aboutMeta = [
   { label: "Chapter Seat", value: "George Mason University, Fairfax, VA" },
 ] as const;
 
+/**
+ * Chapter lineage fallback (when Google Sheets env is not set or export fails).
+ *
+ * **Non-coders:** Use the Google Sheet instead (see `.env.example`).
+ *
+ * Sheet layout (when using Google Sheets): row 1 = Line Name, Semester/Year,
+ * Member 1, Member 2, … Each later row = one line.
+ */
+export type ChapterLineageEntry = {
+  /** Shown as “[Semester/Year]: [Line Name]” when semester is present (see sheet parser). */
+  lineName: string;
+  /** All brothers who crossed on the line (list each on its own string). */
+  members: readonly string[];
+};
+
+export const chapterLineage: readonly ChapterLineageEntry[] = [
+  // Paste from your records, e.g.:
+  // {
+  //   lineName: "Fall 2024: The Example Line",
+  //   members: ["Bro. One", "Bro. Two"],
+  // },
+];
+
 export const graduateChapter = {
   name: "Xi Alpha Lambda",
   website: "https://www.xal1906.com/",
@@ -65,34 +91,41 @@ export const graduateChapterCopy = {
 } as const;
 
 /**
- * Executive board (3 members × 3 positions each)
+ * Executive board
  *
- * Edit this array in THIS file (`src/site/content.ts`):
- * - `name` — full name as shown on the card (ALL CAPS recommended for display match).
- * - `photo` — URL from site root: whatever sits under `public/`. E.g. `public/Leadership_Headshots/x.jpg`
- *   → `"/Leadership_Headshots/x.jpg"`. Never prefix with `public/` or the repo folder name.
- * - `positions` — exactly three role titles, top to bottom.
+ * Primary source: Google Sheet when `GOOGLE_SHEETS_EXECUTIVE_BOARD_SPREADSHEET_ID` is set.
+ * `executiveBoard` below is the fallback; `executiveBoardHeadshots` maps **lower-case**
+ * names from the sheet to paths under `public/` (covers spelling variants).
  */
 export type ExecutiveBoardMember = {
   name: string;
   photo: string | null;
-  positions: readonly [string, string, string];
+  position: string;
+};
+
+/** Keys must be `name.trim().toLowerCase()` as it appears on the sheet. */
+export const executiveBoardHeadshots: Record<string, string> = {
+  "cameron portis": "/Leadership_Headshots/CPortis_Headshot.jpg",
+  "cameron porits": "/Leadership_Headshots/CPortis_Headshot.jpg",
+  "teondre nash": "/Leadership_Headshots/TNash_Headshot.jpeg",
+  "aaron emenhiser": "/Leadership_Headshots/AEmenhiser_Headshot.jpeg",
+  "aaron emenhise": "/Leadership_Headshots/AEmenhiser_Headshot.jpeg",
 };
 
 export const executiveBoard: ExecutiveBoardMember[] = [
   {
     name: "Cameron Portis",
     photo: "/Leadership_Headshots/CPortis_Headshot.jpg",
-    positions: ["President", "Director of Educational Activities", "Chaplain"],
+    position: "President",
   },
   {
     name: "Teondre Nash",
     photo: "/Leadership_Headshots/TNash_Headshot.jpeg",
-    positions: ["Vice President", "Treasurer", "Intake Coordinator"],
+    position: "Treasurer",
   },
   {
     name: "Aaron Emenhiser",
     photo: "/Leadership_Headshots/AEmenhiser_Headshot.jpeg",
-    positions: ["Secretary", "Associate Editor to the Sphinx", "Historian"],
+    position: "Secretary",
   },
 ];
