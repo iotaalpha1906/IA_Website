@@ -1,4 +1,5 @@
 import { Award, CalendarDays, GraduationCap } from "lucide-react";
+import { AboutLineageBackToTop } from "@/components/AboutLineageBackToTop";
 import { ChapterLineagePanel } from "@/components/ChapterLineagePanel";
 import { ExecutiveBoardCarousel } from "@/components/ExecutiveBoardCarousel";
 import { ScrollReveal } from "@/components/ScrollReveal";
@@ -62,6 +63,7 @@ export async function AboutSection() {
             <ChapterLineagePanel entries={lineage} />
           </div>
         </ScrollReveal>
+        <AboutLineageBackToTop />
       </section>
 
       <section
