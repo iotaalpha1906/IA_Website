@@ -1,4 +1,5 @@
 import { parse } from "csv-parse/sync";
+import { unstable_noStore as noStore } from "next/cache";
 import {
   fetchPublicGoogleSheetCsv,
   resolveSpreadsheetFromEnv,
@@ -162,6 +163,10 @@ function parseLineageCsv(csvText: string): ChapterLineageEntry[] {
  * `chapterLineage` in `src/site/content.ts`.
  */
 export async function getChapterLineage(): Promise<ChapterLineageEntry[]> {
+  // Avoid baking empty lineage into the static homepage at build time (no env /
+  // flaky Google CSV from CI). Resolve on each production request instead.
+  noStore();
+
   const resolved = resolveLineageSheetEnv();
 
   if (!resolved) {
